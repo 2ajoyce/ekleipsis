@@ -1,15 +1,33 @@
 <app-feedback-summary></app-feedback-summary>
-<button class="btn-primary" data-toggle="modal" data-target="#add-team-feedback">Add New Team Feedback</button>
-<div id="add-team-feedback" class="modal">
-  <div class="modal-header">Modal Title</div>
-  <div class="modal-body">
-    <h1>Employees name</h1>
-    <select name="employee-name" id="employees-dropdown">
-      <option *ngFor="let teamMember of teamMembers; let i = index" value="teamMember.name">{{ teamMember.Name }}</option>
-    </select>
+<div id="add-team-feedback" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <select name="employee-name" id="employees-dropdown">
+          <option *ngFor="let teamMember of teamMembersFromFB | async; let i = index" value="teamMember.$value">{{ teamMember.$value }}</option>
+        </select>
+        <button type="button" class="close" data-dismiss="modal" data-backdrop="static"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="note-type" id="note-type">
+          <div class="note-type-option"><input type="radio" name="note-type" value="positive"/><h3>Positive</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="notes"/><h3>Notes</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="improvement"/><h3>Improvement</h3></div>
+        </div>
+        <textarea name="note-text" id="note-text" cols="80" rows="7"></textarea>
+      </div>
+      <div class="modal-footer">
+        <div class="anonymous-checkbox"><h3>Anonymous?</h3><input type="checkbox" /></div>
+        <div class="modal-buttons">
+          <button class="btn-danger">Cancel</button>
+          <button class="btn-success">Send</button>
+          <button class="btn-primary">Done</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="modal-buttons"></div>
 </div>
+<button class="btn-primary" data-toggle="modal" data-target="#add-team-feedback">Add New Team Feedback</button>
 
 <!-- <md-card>
     <h1 md-card-title class="app">

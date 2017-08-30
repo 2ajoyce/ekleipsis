@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { TeamMember } from './models/TeamMember';
+import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
 
 @Component({
   selector: 'app-root',
@@ -11,42 +12,20 @@ import { TeamMember } from './models/TeamMember';
 export class AppComponent {
   db: FirebaseObjectObservable<any[]>;
   items: FirebaseListObservable<any[]>;
+  teamMembersFromFB: FirebaseListObservable<any[]>;
   isAdding: boolean = false;
   addData: '';
   editData: '';
   editingKey: string = '';
-  teamMembers: Array<TeamMember> = [] ;
-
-  ngOnInit() {
-    var testMember = new TeamMember();
-    testMember.Id = '0';
-    testMember.Name = 'Bob Ross';
-    this.teamMembers.push(testMember);
-  }
-
-  deleteItem(key: string) {
-    this.items.remove(key).then(_ => console.log('item deleted!'));
-  }
-
-  addItem() {
-    if (this.isAdding) {
-      this.items.push(this.addData);
-    }
-    this.isAdding = !this.isAdding;
-  }
-
-  editItem(data: any) {
-    if (this.editingKey === data.$key) {
-      this.items.remove(data.$key);
-      this.items.push(data.$value);
-    } else {
-      this.editingKey = data.$key;
-    }
-    console.log(data);
-  }
+  teamMembers: Array<TeamMember> = [];
 
   constructor(public af: AngularFireDatabase) {
     this.db = af.object('/');
     this.items = af.list('/items');
+    this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
+  }
+
+  // Runs on init of the page
+  ngOnInit() {
   }
 }

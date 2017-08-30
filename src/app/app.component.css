@@ -1,3 +1,62 @@
 .app-title {
   text-align: center;
 }
+
+/**MODAL**/
+.modal-dialog {
+  width: 40%;
+}
+
+.modal-header select {
+  font-size: 20px;
+}
+
+.modal-body {
+  width: 80%;
+  margin: auto;
+}
+
+.modal-body textarea {
+  width: 100%;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-type {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.note-type-option {
+  display: flex;
+  justify-content: space-around;
+}
+
+.note-type-option h3 {
+  margin: 0 0 0 15px;
+}
+
+.note-type-option input {
+  margin-top: 6.5px;
+}
+
+.anonymous-checkbox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.anonymous-checkbox h3 {
+  margin: 0 15px 0 0;
+}
+
+.anonymous-checkbox input {
+  margin-top: 6.5px;
+}
+
+.modal-buttons {
+  float: right;
+}
