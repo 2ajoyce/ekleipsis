@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { MdListModule, MdCardModule, MdInputModule } from '@angular/material';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginPageComponent,
     NavbarComponent,
+    HeaderComponent,
     FooterComponent
   ],
   imports: [
