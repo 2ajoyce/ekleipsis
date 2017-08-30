@@ -1,4 +1,4 @@
-<router-outlet></router-outlet>
+<app-columns [columnsData]="teamFeedbackNotesFromFB"></app-columns>
 <div id="container">
   <div id="header">
     <button class="btn-primary" data-toggle="modal" data-target="#add-team-feedback">Add New Team Feedback</button>
@@ -70,24 +70,3 @@
     </div>
   </div>
 </div>
-
-<!-- <md-card>
-    <h1 md-card-title class="app">
-      Hello to {{ (db | async)?.title }}!
-    </h1>
-    <h2 md-subheader>Todo List: </h2>
-    < *ngFor="let item of items | async; let i = index">
-      <i class="material-icons">format_list_bulleted</i>
-      <md-icon md-list-icon class="material-icons" (click)="deleteItem(item.$key)">close</md-icon>
-      <h3 *ngIf="editingKey != item.$key" md-line>{{ item.$value }}</h3>
-      <input *ngIf="editingKey == item.$key" type="text" name="item.$value" value="item.$value  " [(ngModel)]="editData" />
-      <h3 (click)="editItem(item)">Edit Task</h3>
-    </>
-  </md-list>
-  <div *ngIf="isAdding">
-    <md-list-item>
-      <input type="text" placeholder="Task Name" value="addData" name="addData" [(ngModel)]="addData"/>
-    </md-list-item>
-  </div>
-  <button class="btn-primary" (click)="addItem()">Add ToDo</button>
-</md-card> -->

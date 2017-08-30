@@ -24,12 +24,7 @@ export class AppComponent {
   teamMembers: Array<TeamMember> = [];
   teamFeedback: boolean = true;
   teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
-  column1Title: string = 'Positives';
-  column1Data: any[] = [];
-  column2Title: string = 'Notes';
-  column2Data: any[] = [];
-  column3Title: string = 'Improvements';
-  column3Data: any[] = [];
+
 
   constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.user = afAuth.authState;
@@ -41,21 +36,5 @@ export class AppComponent {
 
   // Runs on init of the page
   ngOnInit() {
-    this.getColumnData(this.teamFeedbackNotesFromFB);
-  }
-
-  // Filters the teamFeedbackNotes into the three columns
-  getColumnData(data: FirebaseListObservable<any[]>) {
-    data.forEach(note => {
-      if (note[0].$key === 'category') {
-        if (note[0].$value === 'positive') {
-          this.column1Data.push(note);
-        } else if (note[0].$value === 'note') {
-          this.column2Data.push(note);
-        } else if (note[0].$value === 'improvement') {
-          this.column3Data.push(note);
-        }
-      }
-    });
   }
 }
