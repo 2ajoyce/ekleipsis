@@ -8,9 +8,12 @@ import { AuthService } from './providers/auth.service';
 import { AppComponent } from './app.component';
 
 import { MdListModule, MdCardModule, MdInputModule } from '@angular/material';
+import { FeedbackSummaryComponent } from './feedback-summary/feedback-summary.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from './auth.guard';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -21,6 +24,12 @@ export const firebaseConfig = {
   messagingSenderId: '114366333871'
 };
 
+const appRoutes: Routes = [
+  { path: '', component: LoginPageComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: '**', component: LoginPageComponent }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +39,14 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(appRoutes),
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MdListModule,
     MdCardModule,
-    MdInputModule,
+    MdInputModule
   ],
   providers: [ AuthService ],
   bootstrap: [AppComponent]
