@@ -2,7 +2,13 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { TeamMember } from './models/TeamMember';
+<<<<<<< HEAD
 import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
+=======
+import {Observable} from 'rxjs/Observable';
+import {AngularFireAuth} from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+>>>>>>> b1238c817082c5534768bd8ec32876e22ae80090
 
 @Component({
   selector: 'app-root',
@@ -10,6 +16,7 @@ import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  user: Observable<firebase.User>;
   db: FirebaseObjectObservable<any[]>;
   items: FirebaseListObservable<any[]>;
   teamMembersFromFB: FirebaseListObservable<any[]>;
@@ -19,7 +26,8 @@ export class AppComponent {
   editingKey: string = '';
   teamMembers: Array<TeamMember> = [];
 
-  constructor(public af: AngularFireDatabase) {
+  constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
+    this.user = afAuth.authState;
     this.db = af.object('/');
     this.items = af.list('/items');
     this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
