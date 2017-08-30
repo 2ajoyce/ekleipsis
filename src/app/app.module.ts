@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService } from './providers/auth.service';
 import { AppComponent } from './app.component';
 
 import { MdListModule, MdCardModule, MdInputModule } from '@angular/material';
 import { FeedbackSummaryComponent } from './feedback-summary/feedback-summary.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -20,6 +23,7 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginPageComponent,
     FeedbackSummaryComponent
   ],
   imports: [
@@ -27,11 +31,12 @@ export const firebaseConfig = {
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     MdListModule,
     MdCardModule,
     MdInputModule,
   ],
-  providers: [],
+  providers: [ AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

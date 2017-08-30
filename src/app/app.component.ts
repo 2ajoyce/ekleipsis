@@ -2,6 +2,9 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { TeamMember } from './models/TeamMember';
+import {Observable} from 'rxjs/Observable';
+import {AngularFireAuth} from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +12,7 @@ import { TeamMember } from './models/TeamMember';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  user: Observable<firebase.User>;
   db: FirebaseObjectObservable<any[]>;
   items: FirebaseListObservable<any[]>;
   isAdding: boolean = false;
@@ -45,7 +49,8 @@ export class AppComponent {
     console.log(data);
   }
 
-  constructor(public af: AngularFireDatabase) {
+  constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
+    this.user = afAuth.authState;
     this.db = af.object('/');
     this.items = af.list('/items');
   }
