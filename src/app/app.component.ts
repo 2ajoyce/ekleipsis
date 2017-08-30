@@ -1,10 +1,8 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import { TeamMember } from './models/TeamMember';
-import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
+import {Component} from '@angular/core';
+import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import {TeamMember} from './models/TeamMember';
+import {Observable} from 'rxjs/Observable';
+import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Component({

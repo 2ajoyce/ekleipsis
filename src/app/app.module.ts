@@ -11,11 +11,10 @@ import {MdCardModule, MdInputModule, MdListModule} from '@angular/material';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
-import {RouterModule, Routes} from '@angular/router';
 import {ColumnComponent} from './column/column.component';
 import {ColumnsComponent} from './columns/columns.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RegistrationPageComponent} from "./registration-page/registration-page.component";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RegistrationPageComponent} from './registration-page/registration-page.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -26,10 +25,10 @@ export const firebaseConfig = {
   messagingSenderId: '114366333871'
 };
 
-const appRoutes: Routes = [
-  { path: '', component: AppComponent },
-  { path: '**', component: AppComponent}
-];
+// const appRoutes: Routes = [
+//   { path: '', component: AppComponent },
+//   { path: '**', component: AppComponent}
+// ];
 
 @NgModule({
   declarations: [
@@ -43,7 +42,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    // RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
