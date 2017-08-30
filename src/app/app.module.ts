@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
+import { ColumnComponent } from './column/column.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginPageComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ColumnComponent
   ],
   imports: [
     BrowserModule,

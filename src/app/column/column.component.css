@@ -1,0 +1,18 @@
+.columns {
+    height: 500px;
+}
+
+.column1 {
+    background: lightgreen;
+    border: 2px solid green;
+}
+
+.column2 {
+    background: lightyellow;
+    border: 2px solid yellow;
+}
+
+.column3 {
+    background: pink;
+    border: 2px solid red;
+}

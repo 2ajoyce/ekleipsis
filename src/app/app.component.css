@@ -6,26 +6,6 @@
   margin: auto;
 }
 
-/**COLUMNS**/
-.columns {
-  height: 500px;
-}
-
-#column3 {
-  background: pink;
-  border: 2px solid red;
-}
-
-#column2 {
-  background: lightyellow;
-  border: 2px solid yellow;
-}
-
-#column1 {
-  background: lightgreen;
-  border: 2px solid green;
-}
-
 /**MODAL**/
 .modal-dialog {
   width: 40%;
