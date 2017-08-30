@@ -2,13 +2,10 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { TeamMember } from './models/TeamMember';
-<<<<<<< HEAD
 import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
-=======
 import {Observable} from 'rxjs/Observable';
 import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
->>>>>>> b1238c817082c5534768bd8ec32876e22ae80090
 
 @Component({
   selector: 'app-root',
