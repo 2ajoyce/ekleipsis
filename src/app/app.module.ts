@@ -1,20 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthService } from './providers/auth.service';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AuthService} from './providers/auth.service';
+import {AppComponent} from './app.component';
 
-import { MdListModule, MdCardModule, MdInputModule } from '@angular/material';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
+import {MdCardModule, MdInputModule, MdListModule} from '@angular/material';
+import {LoginPageComponent} from './login-page/login-page.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {FooterComponent} from './footer/footer.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
 import { ColumnComponent } from './column/column.component';
 import { ColumnsComponent } from './columns/columns.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -26,9 +27,9 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: '', component: LoginPageComponent },
+  { path: '', component: AppComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: '**', component: LoginPageComponent }
+  { path: '**', component: AppComponent}
 ];
 
 @NgModule({
@@ -44,12 +45,14 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MdListModule,
     MdCardModule,
-    MdInputModule
+    MdInputModule,
+    BrowserAnimationsModule,
   ],
   providers: [ AuthService ],
   bootstrap: [AppComponent]

@@ -3,11 +3,11 @@ import {AuthService} from '../providers/auth.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  selector: 'app-registration-page',
+  templateUrl: './registration-page.component.html',
+  styleUrls: ['./registration-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class RegistrationPageComponent implements OnInit {
   authService: AuthService;
   private _afAuth: AngularFireAuth;
 
@@ -19,8 +19,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(loginForm: any) {
-    this.authService.register(loginForm.email, loginForm.password);
+  onSubmit(registrationForm: any) {
+    this.authService.register(registrationForm.email, registrationForm.password);
   }
-
 }
