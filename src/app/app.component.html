@@ -1,11 +1,24 @@
-<md-card>
+<app-feedback-summary></app-feedback-summary>
+<button class="btn-primary" data-toggle="modal" data-target="#add-team-feedback">Add New Team Feedback</button>
+<div id="add-team-feedback" class="modal">
+  <div class="modal-header">Modal Title</div>
+  <div class="modal-body">
+    <h1>Employees name</h1>
+    <select name="employee-name" id="employees-dropdown">
+      <option *ngFor="let teamMember of teamMembers; let i = index" value="teamMember.name">{{ teamMember.Name }}</option>
+    </select>
+  </div>
+  <div class="modal-buttons"></div>
+</div>
+
+<!-- <md-card>
     <h1 md-card-title class="app">
       Welcome to {{ (db | async)?.title }}!
     </h1>
   <md-list>
     <h2 md-subheader>Todo List: </h2>
     <md-list-item *ngFor="let item of items | async; let i = index">
-      <!--<i class="material-icons">format_list_bulleted</i>-->
+      <i class="material-icons">format_list_bulleted</i>
       <md-icon md-list-icon class="material-icons" (click)="deleteItem(item.$key)">close</md-icon>
       <h3 *ngIf="editingKey != item.$key" md-line>{{ item.$value }}</h3>
       <input *ngIf="editingKey == item.$key" type="text" name="item.$value" value="item.$value  " [(ngModel)]="editData" />
@@ -18,4 +31,4 @@
     </md-list-item>
   </div>
   <button class="btn-primary" (click)="addItem()">Add ToDo</button>
-</md-card>
+</md-card> -->

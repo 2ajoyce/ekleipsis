@@ -20,15 +20,15 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "app/styles/normalize.css",
-        "app/styles/bootstrap.css",
-        "app/styles/font-awesome.css",
-        "app/styles/main.css"
+        "assets/styles/normalize.css",
+        "assets/styles/bootstrap.css",
+        "assets/styles/font-awesome.css",
+        "assets/styles/main.css"
       ],
       "scripts": [
-        "app/scripts/jquery-3.2.1.min",
-        "app/scripts/tether.js",
-        "app/scripts/bootstrap.js"
+        "assets/scripts/jquery-3.2.1.min",
+        "assets/scripts/tether.js",
+        "assets/scripts/bootstrap.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

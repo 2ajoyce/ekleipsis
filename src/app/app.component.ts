@@ -1,6 +1,7 @@
-import { Component, OnChanges } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { TeamMember } from './models/TeamMember';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,14 @@ export class AppComponent {
   addData: '';
   editData: '';
   editingKey: string = '';
+  teamMembers: Array<TeamMember> = [] ;
+
+  ngOnInit() {
+    var testMember = new TeamMember();
+    testMember.Id = '0';
+    testMember.Name = 'Bob Ross';
+    this.teamMembers.push(testMember);
+  }
 
   deleteItem(key: string) {
     this.items.remove(key).then(_ => console.log('item deleted!'));
