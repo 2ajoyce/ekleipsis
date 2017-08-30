@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(loginForm: any) {
-    this.authService.register(loginForm.email, loginForm.password);
+    this.authService.login(loginForm.email, loginForm.password);
   }
 
 }
