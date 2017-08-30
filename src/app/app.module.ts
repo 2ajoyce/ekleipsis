@@ -8,8 +8,9 @@ import { AuthService } from './providers/auth.service';
 import { AppComponent } from './app.component';
 
 import { MdListModule, MdCardModule, MdInputModule } from '@angular/material';
-import { FeedbackSummaryComponent } from './feedback-summary/feedback-summary.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -24,7 +25,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     LoginPageComponent,
-    FeedbackSummaryComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

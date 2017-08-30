@@ -2,6 +2,30 @@
   text-align: center;
 }
 
+#container {
+  margin: auto;
+}
+
+/**COLUMNS**/
+.columns {
+  height: 500px;
+}
+
+#column1 {
+  background: pink;
+  border: 2px solid red;
+}
+
+#column2 {
+  background: lightyellow;
+  border: 2px solid yellow;
+}
+
+#column3 {
+  background: lightgreen;
+  border: 2px solid green;
+}
+
 /**MODAL**/
 .modal-dialog {
   width: 40%;
@@ -56,6 +80,20 @@
 .anonymous-checkbox input {
   margin-top: 6.5px;
 }
+
+.share-checkbox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.share-checkbox h3 {
+  margin: 0 15px 0 0;
+}
+
+.share-checkbox input {
+  margin-top: 6.5px;
+}
+
 
 .modal-buttons {
   float: right;

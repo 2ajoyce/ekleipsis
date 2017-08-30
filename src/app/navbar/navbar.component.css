@@ -1,0 +1,9 @@
+#navbar {
+    background: orange;
+    color: white;
+    display: flex;
+    font-size: 32px;
+    justify-content: space-around;
+    height: 50px;
+}
+
