@@ -1,0 +1,21 @@
+<md-card>
+    <h1 md-card-title class="app">
+      Welcome to {{ (db | async)?.title }}!
+    </h1>
+  <md-list>
+    <h2 md-subheader>Todo List: </h2>
+    <md-list-item *ngFor="let item of items | async; let i = index">
+      <!--<i class="material-icons">format_list_bulleted</i>-->
+      <md-icon md-list-icon class="material-icons" (click)="deleteItem(item.$key)">close</md-icon>
+      <h3 *ngIf="editingKey != item.$key" md-line>{{ item.$value }}</h3>
+      <input *ngIf="editingKey == item.$key" type="text" name="item.$value" value="item.$value  " [(ngModel)]="editData" />
+      <h3 (click)="editItem(item)">Edit Task</h3>
+    </md-list-item>
+  </md-list>
+  <div *ngIf="isAdding">
+    <md-list-item>
+      <input type="text" placeholder="Task Name" value="addData" name="addData" [(ngModel)]="addData"/>
+    </md-list-item>
+  </div>
+  <button class="btn-primary" (click)="addItem()">Add ToDo</button>
+</md-card>
