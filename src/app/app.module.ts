@@ -8,7 +8,6 @@ import { AuthService } from './providers/auth.service';
 import { AppComponent } from './app.component';
 
 import { MdListModule, MdCardModule, MdInputModule } from '@angular/material';
-import { FeedbackSummaryComponent } from './feedback-summary/feedback-summary.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
