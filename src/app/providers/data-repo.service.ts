@@ -32,7 +32,8 @@ export class DataRepoService {
         result.push(new User(
           value.child('email').val(),
           value.child('firstName').val(),
-          value.child('lastName').val()
+          value.child('lastName').val(),
+          value.child('jobTitle').val()
         ));
         return result.length === snap.numChildren();
       });
