@@ -1,11 +1,24 @@
 <app-header></app-header>
-<app-columns [columnsData]="teamFeedbackNotesFromFB"></app-columns>
+
 <div id="container">
   <div id="header">
-    <button class="btn-primary" data-toggle="modal" data-target="#add-team-feedback">Add New Team Feedback</button>
+    <div class="viewedUsername col-xs-4">
+      <select name="activeUsername" id="activeUsername">
+        <option value="activeUsername" *ngFor="let member of teamMembers">{{member}}</option>
+      </select>
+    </div>
+    <div class="tabButtons col-xs-4">
+      <button class="button" (click)="switchTab('teamFeedback')" [ngClass]="{'btn-primary': activeTab == 'teamFeedback'}">Team Feedback</button>
+      <button class="button" (click)="switchTab('1on1')" [ngClass]="{'btn-primary': activeTab == '1on1'}">1-on-1</button>
+    </div>
+    <div class="viewedPosition col-xs-4">
+      <h1>{{ activePosition }}</h1>
+    </div>
+    <!-- <button class="btn-primary" data-toggle="modal" data-target="#add-team-feedback">Add New Team Feedback</button>
     <button class="btn-primary" data-toggle="modal" data-target="#add-1on1-feedback">Add New 1-on-1 Feedback</button>
-    <button class="btn-primary" data-toggle="modal" data-target="#login">Login/Register</button>
+    <button class="btn-primary" data-toggle="modal" data-target="#login">Login/Register</button> -->
   </div>
+  <app-columns [columnsData]="teamFeedbackNotesFromFB" [mode]="activeTab"></app-columns>
 </div>
 
 <div id="login" class="modal fade" role="dialog" tabindex="-1">

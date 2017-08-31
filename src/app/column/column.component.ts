@@ -9,7 +9,8 @@ import { TeamFeedbackNote } from '../models/TeamFeedbackNoteModel';
 export class ColumnComponent implements OnInit {
   @Input() title: string = '';
   @Input() data: any[] = [];
-  column: number = 0;
+  @Input() color: string = '';
+  @Input() column: number = 0;
 
   constructor() { }
 

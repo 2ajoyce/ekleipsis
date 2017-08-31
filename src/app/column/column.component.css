@@ -16,3 +16,7 @@
     background: pink;
     border: 2px solid red;
 }
+
+.columns h1 {
+    text-align: center;
+}
