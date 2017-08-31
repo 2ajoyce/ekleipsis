@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../providers/auth.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {logger} from "codelyzer/util/logger";
@@ -9,12 +9,11 @@ import {logger} from "codelyzer/util/logger";
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
+  @Input() fbAuth: AngularFireAuth;
   authService: AuthService;
-  private _afAuth: AngularFireAuth;
 
-  constructor(afAuth: AngularFireAuth) {
-    this._afAuth = afAuth;
-    this.authService = new AuthService(this._afAuth);
+  constructor() {
+    this.authService = new AuthService(this.fbAuth);
   }
 
   ngOnInit() {

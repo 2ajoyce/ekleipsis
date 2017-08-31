@@ -1,13 +1,14 @@
-import {Component, OnChanges} from '@angular/core';
-import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
-import {User} from './models/user';
+import {Component} from '@angular/core';
+import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {AngularFireAuth} from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import {DataRepoService} from './providers/data-repo.service';
-import { OneOnOneNote } from './models/OneOnOneNoteModel';
-import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
-import { TeamMember } from './models/TeamMember';
+import {OneOnOneNote} from './models/OneOnOneNoteModel';
+import {TeamFeedbackNote} from './models/TeamFeedbackNoteModel';
+import {User as fbUser} from "firebase/app";
+import {User} from "./models/user";
+import {AuthService} from "./providers/auth.service";
+import {TeamMember} from "./models/TeamMember";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ import { TeamMember } from './models/TeamMember';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  afUser: string;
+  afUser: Observable<fbUser>;
   user: User;
   db: FirebaseObjectObservable<any[]>;
   // teamMembersFromFB: FirebaseListObservable<any[]>;
@@ -23,17 +24,20 @@ export class AppComponent {
   teamFeedback: Array<TeamFeedbackNote>;
   oneOnOneNotes: Array<OneOnOneNote>;
   // teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
-  jobTitle: string = '';
   activeTab: string = 'teamFeedback';
   repoService: DataRepoService;
-  teamMembers: Observable<Array<User>>;
+  teamMembers: Array<User>;
   columnsData: any[];
   addTeamFeedbackBuffer: TeamFeedbackNote;
   oneOnOneBuffer: OneOnOneNote;
   afAuth: AngularFireAuth;
   teamMembersStuff: Array<TeamMember>;
   oneOnOneFeedback: Array<OneOnOneNote>;
+<<<<<<< HEAD
   teamFeedbackBuffer: TeamFeedbackNote;
+=======
+  authService: AuthService;
+>>>>>>> 9cdcfb461b065b7e3bb0e5cca0491d12120339e7
 
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -47,7 +51,6 @@ export class AppComponent {
 
     // this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
     // this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
-    this.jobTitle = null;
     this.teamMembers = null;
   }
 
@@ -102,6 +105,19 @@ export class AppComponent {
 
   // Runs on init of the page
   async ngOnInit() {
+    this.authService = new AuthService(this.afAuth);
+    this.afUser = this.authService.getUser();
+    this.afUser.subscribe(async user => {
+      if (user) {
+        // user logged in
+        this.user = await this.repoService.getUser(this.repoService, user.email);
+        this.teamMembers = await this.repoService.getTeamMembers(this.repoService, user.email);
+        this.oneOnOneNotes = await this.repoService.getOneOnOneNotes(this.repoService, user.email, false);
+      } else {
+        // user not logged in
+        this.user = null;
+      }
+    });
     this.oneOnOneBuffer = new OneOnOneNote(
       new User('select', 'select', 'select', 'select'),
       'notes',
@@ -116,14 +132,5 @@ export class AppComponent {
     this.setTeamFeedback();
     this.setOneOnOne();
     this.setColumnData();
-    this.users = await this.repoService.getUsers();
-    this.afAuth.authState.subscribe(event => this.afUser = event.email);
-    this.afAuth.authState.subscribe(event => this.user = Observable.create(this.repoService.getUser(this.repoService, event.email)));
-    this.afAuth.authState.subscribe(event => this.teamMembers = Observable.create(this.repoService.getTeamMembers(this.repoService, event.email)));
-    this.afAuth.authState.subscribe(event => this.oneOnOneNotes = Observable.create(this.repoService.getOneOnOneNotes(this.repoService, event.email, false)));
-    // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
-    // console.log('Kyle', kyle);
-    // let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');
-    // console.log(temp);
   }
 }
