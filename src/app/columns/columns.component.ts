@@ -36,11 +36,11 @@ export class ColumnsComponent implements OnInit {
   getColumnData(data: any[]) {
     data.forEach(note => {
       if (note[0].$key === 'category') {
-        if (note[0].$value === 'positive') {
+        if (note[0].$value === 'positive' || note[0].$value === 'goals') {
           this.column1Data.push(note);
         } else if (note[0].$value === 'note') {
           this.column2Data.push(note);
-        } else if (note[0].$value === 'improvement') {
+        } else if (note[0].$value === 'improvement' || note[0].$value === 'takeaways') {
           this.column3Data.push(note);
         }
       }
