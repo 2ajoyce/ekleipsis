@@ -33,13 +33,14 @@ export class DataRepoService {
   public getUsers():Array<User> {
     let result: User[] = new Array<User>();
     this.af.list('/users').$ref.once('value', function (snap) {
-      snap.forEach(function (value) {
+      snap.forEach(value => {
+        console.log(snap.toJSON());
         result.push(new User(
           value.child('email').val(),
           value.child('firstName').val(),
           value.child('lastName').val()
         ));
-        return true;
+        return false;
       });
     });
     return result;

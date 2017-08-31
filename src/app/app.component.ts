@@ -27,7 +27,7 @@ export class AppComponent {
   teamMembers: string[] = [];
   activePosition: string = '';
   activeTab: string = 'teamFeedback';
-  // repoService: DataRepoService;
+  repoService: DataRepoService;
 
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -51,8 +51,8 @@ export class AppComponent {
     // this.teamMembers.push('Brian Giunta');
     // this.teamMembers.push('Kyle Shaffar');
     this.activePosition = 'Associate Software Engineer, AD';
-    // this.repoService = new DataRepoService(afAuth, af);
-    // this.users = this.repoService.getUsers();
+    this.repoService = new DataRepoService(afAuth, af);
+    this.users = this.repoService.getUsers();
   }
 
   // Runs on init of the page
