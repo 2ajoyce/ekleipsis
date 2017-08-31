@@ -1,9 +1,9 @@
 <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm.value)">
   <md-input-container>
-    <input mdInput placeholder="Email" type="email" [(ngModel)]="email" name="email">
+    <input mdInput placeholder="Email" type="email" ngModel name="email">
   </md-input-container>
   <md-input-container>
-    <input mdInput placeholder="Password" type="password" [(ngModel)]="password" name="password">
+    <input mdInput placeholder="Password" type="password" ngModel name="password">
   </md-input-container>
   <button md-button type="submit">Register</button>
 </form>
