@@ -1,7 +1,7 @@
 <div class="header">
     <img src="assets/logo.png" width=192 height=64/>
-    <!--<div class="user-info" data-toggle="modal" data-target="#login"><h1 *ngIf="loggedIn">{{ username }}, Sign Out</h1><h1 *ngIf="!loggedIn">Login/Register</h1></div>-->
-    <div class="user-info" data-toggle="modal" data-target="#login"><h1>Sign Out</h1><h1 *ngIf="!loggedIn">Login/Register</h1></div>
+    <div class="user-info" data-toggle="modal" data-target="#login"><h1 *ngIf="loggedIn">{{ username }}, Sign Out</h1><h1 *ngIf="!loggedIn">Login/Register</h1></div>
+    <!-- <div class="user-info" data-toggle="modal" data-target="#login"><h1>Sign Out</h1><h1 *ngIf="!loggedIn">Login/Register</h1></div> -->
 </div>
 
 <div id="login" class="modal fade" role="dialog" tabindex="-1">
@@ -14,12 +14,3 @@
     </div>
 </div>
 
-<div id="register" class="modal fade" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-conent">
-            <div class="modal-body">
-                <app-registration-page></app-registration-page>
-            </div>
-        </div>
-    </div>
-</div>
