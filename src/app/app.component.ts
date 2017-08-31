@@ -19,10 +19,15 @@ export class AppComponent {
   addData: '';
   editData: '';
   editingKey: string = '';
-  teamMembers: Array<TeamMember> = [];
   teamFeedback: boolean = true;
   teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
+  teamMembers: string[] = [];
+  activePosition: string = '';
+  activeTab: string = 'teamFeedback';
 
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
 
   constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.user = afAuth.authState;
@@ -30,6 +35,12 @@ export class AppComponent {
     this.items = af.list('/items');
     this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
     this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
+    this.teamMembers.push('Joseph Bartley');
+    this.teamMembers.push('Aaron Joyce');
+    this.teamMembers.push('Brandon Rachelski');
+    this.teamMembers.push('Brian Giunta');
+    this.teamMembers.push('Kyle Shaffar');
+    this.activePosition = 'Associate Software Engineer, AD';
   }
 
   // Runs on init of the page

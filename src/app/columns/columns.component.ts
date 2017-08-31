@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
@@ -8,6 +8,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 })
 export class ColumnsComponent implements OnInit {
   @Input() columnsData: FirebaseListObservable<any[]>;
+  @Input() mode: string = 'teamFeedback';
   column1Title: string = 'Positives';
   column1Data: any[] = [];
   column2Title: string = 'Notes';
@@ -19,6 +20,16 @@ export class ColumnsComponent implements OnInit {
 
   ngOnInit() {
     this.getColumnData(this.columnsData);
+  }
+
+  ngOnChanges() {
+    if (this.mode === 'teamFeedback') {
+      this.column1Title = 'Positives';
+      this.column3Title = 'Improvements';
+    } else if (this.mode === '1on1') {
+      this.column1Title = 'Goals';
+      this.column3Title = 'Takeaways';
+    }
   }
 
   // Filters the teamFeedbackNotes into the three columns

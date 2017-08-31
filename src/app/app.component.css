@@ -2,9 +2,44 @@
   text-align: center;
 }
 
+body {
+  background: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
 #container {
   margin: auto;
 }
+
+/**HEADER**/
+#header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#header .viewedUsername {
+  padding-left: 15px;
+}
+
+#header .viewedUsername #activeUsername {
+  margin-top: 19.5px;
+  font-size: 32px;
+}
+
+#header .tabButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+#header .tabButtons button {
+  margin: 10px 0;
+  width: 175px;
+}
+
+#header .viewedPosition {
+  float: right;
+}
+
 
 /**MODAL**/
 .modal-dialog {
