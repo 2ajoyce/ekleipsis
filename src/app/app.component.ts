@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 import {DataRepoService} from './providers/data-repo.service';
 import { OneOnOneNote } from './models/OneOnOneNoteModel';
 import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
+import { TeamMember } from './models/TeamMember';
 
 @Component({
   selector: 'app-root',
@@ -14,19 +15,24 @@ import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user: Observable<firebase.User>;
+  afUser: string;
+  user: User;
   db: FirebaseObjectObservable<any[]>;
-  teamMembersFromFB: FirebaseListObservable<any[]>;
+  // teamMembersFromFB: FirebaseListObservable<any[]>;
   users: User[];
   teamFeedback: Array<TeamFeedbackNote>;
-  oneOnOneFeedback: Array<OneOnOneNote>;
-  teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
-  activePosition: string = '';
+  oneOnOneNotes: Array<OneOnOneNote>;
+  // teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
+  jobTitle: string = '';
   activeTab: string = 'teamFeedback';
   repoService: DataRepoService;
+  teamMembers: Observable<Array<User>>;
   columnsData: any[];
   addTeamFeedbackBuffer: TeamFeedbackNote;
   oneOnOneBuffer: OneOnOneNote;
+  afAuth: AngularFireAuth;
+  teamMembersStuff: Array<TeamMember>;
+  oneOnOneFeedback: Array<OneOnOneNote>;
 
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -34,20 +40,21 @@ export class AppComponent {
   }
 
   constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.user = afAuth.authState;
+    this.afAuth = afAuth;
     this.db = af.object('/');
-
-    this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
-    this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
-    this.activePosition = 'Associate Software Engineer, AD';
     this.repoService = new DataRepoService(afAuth, af);
+
+    // this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
+    // this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
+    this.jobTitle = null;
+    this.teamMembers = null;
   }
 
   setColumnData() {
     if (this.activeTab === 'teamFeedback') {
       this.columnsData = this.teamFeedback;
     } else if (this.activeTab === '1on1') {
-      this.columnsData = this.oneOnOneFeedback;
+      this.columnsData = this.oneOnOneNotes;
     }
   }
 
@@ -101,6 +108,10 @@ export class AppComponent {
     this.setOneOnOne();
     this.setColumnData();
     this.users = await this.repoService.getUsers();
+    this.afAuth.authState.subscribe(event => this.afUser = event.email);
+    this.afAuth.authState.subscribe(event => this.user = Observable.create(this.repoService.getUser(this.repoService, event.email)));
+    this.afAuth.authState.subscribe(event => this.teamMembers = Observable.create(this.repoService.getTeamMembers(this.repoService, event.email)));
+    this.afAuth.authState.subscribe(event => this.oneOnOneNotes = Observable.create(this.repoService.getOneOnOneNotes(this.repoService, event.email, false)));
     // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
     // console.log('Kyle', kyle);
     // let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');

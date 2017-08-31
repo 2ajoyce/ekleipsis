@@ -87,7 +87,7 @@ export class DataRepoService {
     return await result;
   }
 
-  public async getOneOnOneNotes(dataRepo: DataRepoService, withSenders:boolean) {
+  public async getOneOnOneNotes(dataRepo: DataRepoService, employee: string, withSenders: boolean) {
     let result = [];
     let finalResult: OneOnOneNote[] = new Array<OneOnOneNote>();
     await this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
@@ -101,13 +101,15 @@ export class DataRepoService {
         return result.length === snap.numChildren();
       });
       result.forEach(async (item) => {
-        finalResult.push(
-          new OneOnOneNote(
-            await dataRepo.getUser(dataRepo, item[0]),
-            item[1],
-            item[2],
-            await dataRepo.getUser(dataRepo, item[3])
-          ));
+        if (item[0] === employee) {
+          finalResult.push(
+            new OneOnOneNote(
+              await dataRepo.getUser(dataRepo, item[0]),
+              item[1],
+              item[2],
+              await dataRepo.getUser(dataRepo, item[3])
+            ));
+        }
       });
     });
     return await result;
