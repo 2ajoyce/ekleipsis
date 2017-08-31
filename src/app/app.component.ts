@@ -42,7 +42,7 @@ export class AppComponent {
     this.activePosition = 'Associate Software Engineer, AD';
     this.repoService = new DataRepoService(afAuth, af);
     this.users = this.repoService.getUsers();
-    console.log(this.repoService.getFeedbackNotes(this.repoService, true));
+    // console.log(this.repoService.getFeedbackNotes(this.repoService, true));
   }
 
   // Runs on init of the page
