@@ -31,7 +31,7 @@ export class DataRepoService {
   }
 
   public getUsers():Array<User> {
-    let result: User[] = new Array<User>();
+    let result:User[] = new Array<User>();
     this.af.list('/users').$ref.once('value', function (snap) {
       snap.forEach(value => {
         result.push(new User(
@@ -39,7 +39,7 @@ export class DataRepoService {
           value.child('firstName').val(),
           value.child('lastName').val()
         ));
-        return false;
+        return result.length === snap.numChildren();
       });
     });
     return result;
@@ -55,30 +55,31 @@ export class DataRepoService {
             value.child('firstName').val(),
             value.child('lastName').val()
           );
-        };
+        }
+        ;
         return true;
       });
     });
     return result;
   }
 
-  public getFeedbackNotes(withSenders: boolean): Array<TeamFeedbackNote> {
-    let result: Array<TeamFeedbackNote> = null;
+  public getFeedbackNotes(dataRepo: DataRepoService, withSenders: boolean): Array<TeamFeedbackNote> {
+    let result: TeamFeedbackNote[] = new Array<TeamFeedbackNote>();
     this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
-      snap.forEach(function (value) {
-        let sender = this.getUser(value.child('sender').val());
+      snap.forEach(value => {
+        let sender = dataRepo.getUser(value.child('sender').val());
         if (withSenders === false && value.child('isAnonymous').val() === true) {
           sender = null;
         }
         result.push(new TeamFeedbackNote(
           value.child('noteId').val(),
-          this.getUser(value.child('employee').val()),
+          dataRepo.getUser(value.child('employee').val()),
           value.child('category').val(),
           value.child('message').val(),
           value.child('isAnonymous').val(),
           sender
         ));
-        return true;
+        return result.length === snap.numChildren();
       });
     });
     return result;
