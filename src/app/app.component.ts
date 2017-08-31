@@ -5,10 +5,10 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {DataRepoService} from './providers/data-repo.service';
 import {OneOnOneNote} from './models/OneOnOneNoteModel';
 import {TeamFeedbackNote} from './models/TeamFeedbackNoteModel';
-import {User as fbUser} from "firebase/app";
-import {User} from "./models/user";
-import {AuthService} from "./providers/auth.service";
-import {TeamMember} from "./models/TeamMember";
+import {User as fbUser} from 'firebase/app';
+import {User} from './models/user';
+import {AuthService} from './providers/auth.service';
+import {TeamMember} from './models/TeamMember';
 
 @Component({
   selector: 'app-root',
@@ -33,11 +33,9 @@ export class AppComponent {
   afAuth: AngularFireAuth;
   teamMembersStuff: Array<TeamMember>;
   oneOnOneFeedback: Array<OneOnOneNote>;
-<<<<<<< HEAD
   teamFeedbackBuffer: TeamFeedbackNote;
-=======
   authService: AuthService;
->>>>>>> 9cdcfb461b065b7e3bb0e5cca0491d12120339e7
+  dataRepo: DataRepoService;
 
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -48,11 +46,7 @@ export class AppComponent {
     this.afAuth = afAuth;
     this.db = af.object('/');
     this.repoService = new DataRepoService(afAuth, af);
-
-    // this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
-    // this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
-    this.teamMembers = null;
-  }
+    }
 
   setColumnData() {
     if (this.activeTab === 'teamFeedback') {
@@ -101,6 +95,12 @@ export class AppComponent {
 
   setOneOnOne() {
     this.oneOnOneFeedback = Array<OneOnOneNote>();
+    var note = new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'goals', 'Get better at stuff', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD'));
+    var note1 = new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is literally the worst thing ever', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD'));
+    var note2 = new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Hackathons are stressful but fun', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD'));
+    this.oneOnOneFeedback.push(note);
+    this.oneOnOneFeedback.push(note1);
+    this.oneOnOneFeedback.push(note2);
   }
 
   // Runs on init of the page
@@ -111,26 +111,32 @@ export class AppComponent {
       if (user) {
         // user logged in
         this.user = await this.repoService.getUser(this.repoService, user.email);
-        this.teamMembers = await this.repoService.getTeamMembers(this.repoService, user.email);
+        // this.teamMembers = await this.repoService.getTeamMembers(this.repoService, user.email);
         this.oneOnOneNotes = await this.repoService.getOneOnOneNotes(this.repoService, user.email, false);
       } else {
         // user not logged in
         this.user = null;
       }
     });
+    this.teamMembers = [
+      new User("joseph.bartley@vizientinc.com", 'Joseph', 'Bartley', "Associate Software Engineer"),
+      new User("brandon.rachelski@gmail.com", 'Brandon', 'Rachelski', "Associate Software Developer"),
+      new User("brian.giunta@vizientinc.com", 'Brian', 'Giunta', "Associate Software Developer"),
+    ];
     this.oneOnOneBuffer = new OneOnOneNote(
       new User('select', 'select', 'select', 'select'),
       'notes',
       '',
       new User('select', 'select', 'select', 'select'));
-    this.addTeamFeedbackBuffer = new TeamFeedbackNote(
-      new User('select', 'select', 'select', 'select'),
-      'notes',
-      '',
-      false,
-      new User('sender', 'sender', 'sender', 'sender'));
-    this.setTeamFeedback();
-    this.setOneOnOne();
-    this.setColumnData();
+      this.addTeamFeedbackBuffer = new TeamFeedbackNote(
+        new User('select', 'select', 'select', 'select'),
+        'notes',
+        '',
+        false,
+        new User('sender', 'sender', 'sender', 'sender'));
+      this.setTeamFeedback();
+      this.setOneOnOne();
+      this.setColumnData();
+      this.users = await this.repoService.getUsers();
   }
 }

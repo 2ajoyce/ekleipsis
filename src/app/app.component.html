@@ -56,11 +56,11 @@
       </div>
       <div class="modal-body">
         <div class="note-type" id="note-type">
-          <div class="note-type-option"><input type="radio" name="note-type" value="positive" [(ngModel)]="teamFeedbackBuffer.category" ng-value="positives"/><h3>Positive</h3></div>
-          <div class="note-type-option"><input type="radio" name="note-type" value="notes" checked="checked" [(ngModel)]="teamFeedbackBuffer.category" ng-value="notes"/><h3>Notes</h3></div>
-          <div class="note-type-option"><input type="radio" name="note-type" value="improvement" [(ngModel)]="teamFeedbackBuffer.category" ng-value="improvements"/><h3>Improvement</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="positive"/><h3>Positive</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="notes" checked="checked"/><h3>Notes</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="improvement"/><h3>Improvement</h3></div>
         </div>
-        <textarea placeholder="Input a message" name="note-text" id="note-text" cols="80" rows="7" ngControl="teamFeedbackBuffer.message" [(ngModel)]="teamFeedbackBuffer.message" (ngModelChange)="onModelChange()"></textarea>
+        <textarea placeholder="Input a message" name="note-text" id="note-text" cols="80" rows="7"></textarea>
       </div>
       <div class="modal-footer">
         <div class="anonymous-checkbox"><h3>Leave Anonymous Feedback</h3><input type="checkbox" /></div>
