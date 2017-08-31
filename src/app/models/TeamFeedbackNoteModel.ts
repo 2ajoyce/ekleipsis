@@ -1,8 +1,11 @@
+import {FeedbackCategory} from './feedback-category.enum';
+import {User} from './user';
+
 export class TeamFeedbackNote {
-    public TeamFeedbackNoteId: string;
-    public Employee: string;
-    public Category: string;
+    public TeamFeedbackNoteId: number;
+    public Employee: User;
+    public Category: FeedbackCategory;
     public Text: string;
-    public Sender: string;
-    public IsAnonymous: string;
+    public Sender?: User;
+    public IsAnonymous: boolean;
 }
