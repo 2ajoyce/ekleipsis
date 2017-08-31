@@ -51,17 +51,9 @@ export class AppComponent {
   // Runs on init of the page
   async ngOnInit() {
     this.users = await this.repoService.getUsers();
-    this.teamFeedback = await this.repoService.getFeedbackNotes(this.repoService, false);
-    this.oneOnOneFeedback = await this.repoService.getOneOnOneNotes(this.repoService, false);
-    this.setColumnData();
-    // let temp = await this.repoService.getOneOnOneNotes(this.repoService, true);
-    // this.repoService.setOneOnOneNotes(
-    //   new OneOnOneNote(
-    //       new User('ajoyce@gmail.com', 'Aaron', 'Joyce'),
-    //       'Notes',
-    //       'Trying to use less profanity',
-    //       new User('kshaffer@gmail.com', 'Kyle', 'Shaffer')
-    //   )
-    // );
+    // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
+    // console.log('Kyle', kyle);
+    let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');
+    console.log(temp);
   }
 }
