@@ -7,7 +7,9 @@ import { FirebaseListObservable } from 'angularfire2/database';
   styleUrls: ['./columns.component.css']
 })
 export class ColumnsComponent implements OnInit {
-  @Input() columnsData: any[];
+  columnsData: any[];
+  @Input() columnsTFData: any[];
+  @Input() columnsOOOData: any[];
   @Input() mode: string = 'teamFeedback';
   column1Title: string = 'Positives';
   column1Data: any[] = [];
@@ -25,15 +27,21 @@ export class ColumnsComponent implements OnInit {
   ngOnChanges() {
     if (this.mode === 'teamFeedback') {
       this.column1Title = 'Positives';
-      this.column3Title = 'Improvements';
+      this.column3Title = 'Improvements'
+      this.columnsData = this.columnsTFData;
     } else if (this.mode === '1on1') {
       this.column1Title = 'Goals';
       this.column3Title = 'Takeaways';
+      this.columnsData = this.columnsOOOData;
     }
+    this.getColumnData(this.columnsData);
   }
 
   // Filters the teamFeedbackNotes into the three columns
   getColumnData(data: any[]) {
+    this.column1Data = [];
+    this.column2Data = [];
+    this.column3Data = [];
     console.log(data);
     data.forEach(note => {
       if (note.category === 'positives' || note.category === 'goals') {

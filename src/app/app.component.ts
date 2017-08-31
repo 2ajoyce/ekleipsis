@@ -28,6 +28,8 @@ export class AppComponent {
   repoService: DataRepoService;
   teamMembers: Array<User>;
   columnsData: any[];
+  columnsTFData: Array<TeamFeedbackNote> = [];
+  columnsOOOData: Array<OneOnOneNote> = [];
   addTeamFeedbackBuffer: TeamFeedbackNote;
   oneOnOneBuffer: OneOnOneNote;
   afAuth: AngularFireAuth;
@@ -50,9 +52,9 @@ export class AppComponent {
 
   setColumnData() {
     if (this.activeTab === 'teamFeedback') {
-      this.columnsData = this.teamFeedback;
+      this.columnsTFData = this.teamFeedback;
     } else if (this.activeTab === '1on1') {
-      this.columnsData = this.oneOnOneNotes;
+      this.columnsOOOData = this.oneOnOneFeedback;
     }
   }
 
