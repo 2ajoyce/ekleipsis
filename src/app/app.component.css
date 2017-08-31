@@ -8,6 +8,7 @@ body {
 }
 
 #container {
+  background: #eee;
   margin: auto;
 }
 
@@ -37,7 +38,7 @@ body {
 }
 
 #header .viewedPosition {
-  float: right;
+  text-align: right;
 }
 
 
