@@ -45,6 +45,23 @@ export class DataRepoService {
     return result;
   }
 
+  public getUser(email: string): User {
+    let result: User = null;
+    this.af.list('/users').$ref.once('value', function (snap) {
+      snap.forEach(function (value) {
+        if (value.child('email').val() === email) {
+          result = new User(
+            value.child('email').val(),
+            value.child('firstName').val(),
+            value.child('lastName').val()
+          );
+        };
+        return true;
+      });
+    });
+    return result;
+  }
+
   public getFeedbackNotes():Observable<TeamFeedbackNote[]> {
     return null;
   }
