@@ -134,10 +134,38 @@ export class DataRepoService {
   }
 
   public async getTeamMembers(dataRepo: DataRepoService, email: string): Promise<Array<User>> {
-    // let manager = await dataRepo.getManager(dataRepo, email);
-    // let subordinates = await dataRepo.getSubordinates(dataRepo, manager.email);
-    let teamMembers = subordinates.filter((x) => x.email !== email);
-    return teamMembers;
+    let bulk = [];
+    let managerFinal = new Array<string>();
+    let subordinateFinal = new Array<string>();
+    let result = new Array<User>();
+
+    await this.af.list('/subordinates').$ref.once('value', async function(snap) {
+      snap.forEach(value => {
+        bulk.push([
+          value.child('email').val(),
+          value.child('subordinate').val()
+        ]);
+        return bulk.length === snap.numChildren();
+      });
+      await bulk.forEach(async (item) => {
+        if (item[1] === email) {
+          managerFinal.push(item[0]);
+        }
+      });
+      await bulk.forEach(async (item) => {
+        if (item[0] === managerFinal[0]) {
+          // console.log(await dataRepo.getUser(dataRepo, item[1]));
+          subordinateFinal.push(item[1]);
+        }
+      });
+    });
+    subordinateFinal = subordinateFinal.filter((x) => x !== email);
+
+    subordinateFinal.map(async function (item) {
+      result.push(await dataRepo.getUser(dataRepo, item));
+    });
+
+    return await result;
   }
 
   public async getSubordinates(dataRepo: DataRepoService, email: string): Promise<User[]> {

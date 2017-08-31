@@ -53,7 +53,7 @@ export class AppComponent {
     this.users = await this.repoService.getUsers();
     // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
     // console.log('Kyle', kyle);
-    let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');
-    console.log(temp);
+    // let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');
+    // console.log(temp);
   }
 }
