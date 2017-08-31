@@ -31,7 +31,7 @@ export class DataRepoService {
   }
 
   public getUsers():Array<User> {
-    let result:User[] = new Array<User>();
+    let result: User[] = new Array<User>();
     this.af.list('/users').$ref.once('value', function (snap) {
       snap.forEach(function (value) {
         result.push(new User(

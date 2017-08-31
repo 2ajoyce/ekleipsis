@@ -45,11 +45,11 @@ export class AppComponent {
 
     this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
     this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
-    this.teamMembers.push('Joseph Bartley');
-    this.teamMembers.push('Aaron Joyce');
-    this.teamMembers.push('Brandon Rachelski');
-    this.teamMembers.push('Brian Giunta');
-    this.teamMembers.push('Kyle Shaffar');
+    // this.teamMembers.push('Joseph Bartley');
+    // this.teamMembers.push('Aaron Joyce');
+    // this.teamMembers.push('Brandon Rachelski');
+    // this.teamMembers.push('Brian Giunta');
+    // this.teamMembers.push('Kyle Shaffar');
     this.activePosition = 'Associate Software Engineer, AD';
     this.repoService = new DataRepoService(afAuth, af);
     this.users = this.repoService.getUsers();

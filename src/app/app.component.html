@@ -1,11 +1,10 @@
 <app-header></app-header>
-<p>hi: {{ users[0].email }}</p>
-<app-columns [columnsData]="teamFeedbackNotesFromFB"></app-columns>
+<!-- <p>hi: {{ users[0].email }}</p> -->
 <div id="container">
   <div id="header">
     <div class="viewedUsername col-xs-4">
       <select name="activeUsername" class="activeUsername">
-        <option value="activeUsername" *ngFor="let member of teamMembers">{{member}}</option>
+        <option value="activeUsername" *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option>
       </select>
     </div>
     <div class="tabButtons col-xs-4">
