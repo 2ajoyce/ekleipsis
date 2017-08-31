@@ -8,6 +8,7 @@ import {TeamFeedbackNote} from './models/TeamFeedbackNoteModel';
 import {User as fbUser} from "firebase/app";
 import {User} from "./models/user";
 import {AuthService} from "./providers/auth.service";
+import {TeamMember} from "./models/TeamMember";
 
 @Component({
   selector: 'app-root',
