@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AngularFireAuth} from "angularfire2/auth";
+import {User} from "../models/user";
+import {AuthService} from "../providers/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -6,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loggedIn: boolean = false;
-  constructor() { }
+  @Input() fbAuth: AngularFireAuth;
+  @Input() user: User;
+  @Input() authService: AuthService;
+
+  constructor() {}
 
   ngOnInit() {
   }

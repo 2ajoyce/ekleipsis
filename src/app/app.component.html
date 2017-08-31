@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header fbAuth="fbAuth" user="user" authService="authService"></app-header>
 <div id="container">
   <div id="header">
     <div class="viewedUsername col-xs-4">
@@ -13,7 +13,7 @@
       <button class="button" (click)="switchTab('1on1')" [ngClass]="{'btn-warning': activeTab == '1on1'}">1-on-1</button>
     </div>
     <div class="viewedPosition col-xs-4">
-      <h1>{{ activePosition }}</h1>
+      <h1>{{ user?.jobTitle }}</h1>
     </div>
   </div>
   <app-columns [columnsData]="columnsData" [mode]="activeTab"></app-columns>
@@ -24,7 +24,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <select name="employee-name" id="employees-dropdown" [(ngModel)]="oneOnOneBuffer.employee"><option value="select">Select</option><option *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option></select>
+        <select name="employee-name" id="employees-dropdown" [(ngModel)]="oneOnOneBuffer.employee"><option value="select">Select</option><option *ngFor="let user of teamMembers">{{user.firstName}} {{user.lastName}}</option></select>
         <button type="button" class="close" data-dismiss="modal" data-backdrop="static"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">
