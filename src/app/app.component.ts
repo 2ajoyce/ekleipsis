@@ -14,13 +14,13 @@ import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  userQue: Observable<firebase.User>;
+  afUser: string;
   user: User;
   db: FirebaseObjectObservable<any[]>;
   // teamMembersFromFB: FirebaseListObservable<any[]>;
   // users: User[];
   teamFeedback: Array<TeamFeedbackNote>;
-  oneOnOneFeedback: Array<OneOnOneNote>;
+  oneOnOneNotes: Array<OneOnOneNote>;
   // teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
   jobTitle: string = '';
   activeTab: string = 'teamFeedback';
@@ -50,16 +50,16 @@ export class AppComponent {
     if (this.activeTab === 'teamFeedback') {
       this.columnsData = this.teamFeedback;
     } else if (this.activeTab === '1on1') {
-      this.columnsData = this.oneOnOneFeedback;
+      this.columnsData = this.oneOnOneNotes;
     }
   }
 
   // Runs on init of the page
   async ngOnInit() {
-    // this.users = await this.repoService.getUsers();
-    this.userQue.subscribe(event => this.user = Observable.create(this.repoService.getUser(this.repoService, event.email)));
-    this.userQue.subscribe(event => this.teamMembers = Observable.create(this.repoService.getTeamMembers(this.repoService, event.email)));
-    this.userQue.subscribe(event => this.oneOnOneFeedback = Observable.create(this.repoService.getOneOnOneNotes(this.repoService, event.email, false)));
+    this.afAuth.authState.subscribe(event => this.afUser = event.email);
+    this.afAuth.authState.subscribe(event => this.user = Observable.create(this.repoService.getUser(this.repoService, event.email)));
+    this.afAuth.authState.subscribe(event => this.teamMembers = Observable.create(this.repoService.getTeamMembers(this.repoService, event.email)));
+    this.afAuth.authState.subscribe(event => this.oneOnOneNotes = Observable.create(this.repoService.getOneOnOneNotes(this.repoService, event.email, false)));
     // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
     // console.log('Kyle', kyle);
     // let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');
