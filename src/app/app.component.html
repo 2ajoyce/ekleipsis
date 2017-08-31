@@ -24,7 +24,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <select name="employee-name" id="employees-dropdown"><option *ngFor="let teamMember of teamMembers; let i = index" value="teamMember.$value">{{ teamMember.firstName }} {{ teamMember.lastName}}</option></select>
+        <select name="employee-name" id="employees-dropdown"><option value="select">Select</option><option *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option></select>
         <button type="button" class="close" data-dismiss="modal" data-backdrop="static"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">
@@ -51,7 +51,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <select name="employee-name" id="employees-dropdown"><option *ngFor="let teamMember of teamMembersFromFB; let i = index" value="teamMember.$value">{{ teamMember.$value }}</option></select>
+        <select name="employee-name" id="employees-dropdown"><option value="select">Select</option><option *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option></select>
         <button type="button" class="close" data-dismiss="modal" data-backdrop="static"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">

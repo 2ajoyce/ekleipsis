@@ -25,6 +25,8 @@ export class AppComponent {
   activeTab: string = 'teamFeedback';
   repoService: DataRepoService;
   columnsData: any[];
+  addTeamFeedbackBuffer: TeamFeedbackNote;
+  oneOnOneBuffer: OneOnOneNote;
 
   switchTab(tab: string) {
     this.activeTab = tab;
