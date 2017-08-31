@@ -6,6 +6,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {TeamFeedbackNote} from '../models/TeamFeedbackNoteModel';
 import {User} from '../models/user';
+import {OneOnOneNote} from '../models/one-on-one-note';
 
 @Injectable()
 export class DataRepoService {
@@ -45,10 +46,11 @@ export class DataRepoService {
     return result;
   }
 
-  public getUser(email: string): User {
+  public getUser(email: string): firebase.Promise<any> {
     let result: User = null;
-    this.af.list('/users').$ref.once('value', function (snap) {
-      snap.forEach(function (value) {
+    let promise = this.af.list('/users').$ref.once('value', function (snap) {
+      snap.forEach(value => {
+        console.log(value.child('email').val(), email, value.child('email').val() === email)
         if (value.child('email').val() === email) {
           result = new User(
             value.child('email').val(),
@@ -56,56 +58,77 @@ export class DataRepoService {
             value.child('lastName').val()
           );
         }
-        ;
-        return true;
+        return result != null;
       });
     });
-    return result;
+    return promise;
   }
 
   public getFeedbackNotes(dataRepo: DataRepoService, withSenders: boolean): Array<TeamFeedbackNote> {
     let result: TeamFeedbackNote[] = new Array<TeamFeedbackNote>();
     this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
       snap.forEach(value => {
+        let employee = dataRepo.getUser(value.child('employee').val());
         let sender = dataRepo.getUser(value.child('sender').val());
         if (withSenders === false && value.child('isAnonymous').val() === true) {
           sender = null;
         }
-        result.push(new TeamFeedbackNote(
-          value.child('noteId').val(),
-          dataRepo.getUser(value.child('employee').val()),
-          value.child('category').val(),
-          value.child('message').val(),
-          value.child('isAnonymous').val(),
-          sender
-        ));
+        employee.then((a) => {
+          sender.then((b) => {
+            result.push(new TeamFeedbackNote(
+              a,
+              value.child('category').val(),
+              value.child('message').val(),
+              value.child('isAnonymous').val(),
+              b
+            ));
+          });
+        });
         return result.length === snap.numChildren();
       });
     });
     return result;
   }
 
-  public getOneOnOneNotes():FirebaseListObservable<any[]> {
+  public getOneOnOneNotes(dataRepo: DataRepoService): Array<OneOnOneNote> {
+    let result: OneOnOneNote[] = new Array<OneOnOneNote>();
+    this.af.list('/oneOnOneNotes').$ref.once('value', function (snap) {
+      snap.forEach(value => {
+        let employee = dataRepo.getUser(value.child('employee').val());
+        let sender = dataRepo.getUser(value.child('sender').val());
+        employee.then((a) => {
+          sender.then((b) => {
+            result.push(new TeamFeedbackNote(
+              a,
+              value.child('category').val(),
+              value.child('message').val(),
+              b
+            ));
+          });
+        });
+        return result.length === snap.numChildren();
+      });
+    });
+    return result;
+  }
+
+  public getTeamMembers(): FirebaseListObservable<any[]> {
     return null;
   }
 
-  public getTeamMembers():FirebaseListObservable<any[]> {
+  public getSubordinates(): FirebaseListObservable<any[]> {
     return null;
   }
 
-  public getSubordinates():FirebaseListObservable<any[]> {
+  public setFeedbackNotes(): FirebaseListObservable<any[]> {
     return null;
   }
 
-  public setFeedbackNotes():FirebaseListObservable<any[]> {
+  public setOneOnOneNotes(): FirebaseListObservable<any[]> {
     return null;
   }
 
-  public setOneOnOneNotes():FirebaseListObservable<any[]> {
-    return null;
-  }
-
-  public setSubordinates():FirebaseListObservable<any[]> {
+  public setSubordinates(): FirebaseListObservable<any[]> {
     return null;
   }
 
