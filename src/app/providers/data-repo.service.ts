@@ -9,20 +9,20 @@ import {User} from '../models/user';
 
 @Injectable()
 export class DataRepoService {
-  user:Observable<firebase.User>;
-  db:FirebaseObjectObservable<any[]>;
-  users:FirebaseListObservable<any[]>;
-  teamMembersFromFB:FirebaseListObservable<any[]>;
-  isAdding:boolean = false;
-  addData:'';
-  editData:'';
-  editingKey:string = '';
-  teamMembers:Array<TeamMember> = [];
-  teamFeedback:boolean = true;
-  teamFeedbackNotesFromFB:FirebaseListObservable<any[]>;
+  user: Observable<firebase.User>;
+  db: FirebaseObjectObservable<any[]>;
+  users: FirebaseListObservable<any[]>;
+  teamMembersFromFB: FirebaseListObservable<any[]>;
+  isAdding: boolean = false;
+  addData: '';
+  editData: '';
+  editingKey: string = '';
+  teamMembers: Array<TeamMember> = [];
+  teamFeedback: boolean = true;
+  teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
 
 
-  constructor(afAuth:AngularFireAuth, public af:AngularFireDatabase) {
+  constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.user = afAuth.authState;
     this.db = af.object('/');
     this.users = af.list('/users');
@@ -30,8 +30,8 @@ export class DataRepoService {
     this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
   }
 
-  public getUsers():Array<User> {
-    let result:User[] = new Array<User>();
+  public getUsers(): Array<User> {
+    let result: User[] = new Array<User>();
     this.af.list('/users').$ref.once('value', function (snap) {
       snap.forEach(value => {
         result.push(new User(

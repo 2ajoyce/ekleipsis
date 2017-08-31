@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import { User } from './models/user';
 import {Observable} from 'rxjs/Observable';
 import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -12,13 +13,14 @@ import {TeamFeedbackNote} from './models/TeamFeedbackNoteModel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  promise:any;
+  promise: any;
   user: Observable<firebase.User>;
   db: FirebaseObjectObservable<any[]>;
   teamMembersFromFB: FirebaseListObservable<any[]>;
   isAdding: boolean = false;
   addData: '';
   editData: '';
+  users: User[];
   editingKey: string = '';
   teamFeedback: boolean = true;
   teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
@@ -39,6 +41,7 @@ export class AppComponent {
     this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
     this.activePosition = 'Associate Software Engineer, AD';
     this.repoService = new DataRepoService(afAuth, af);
+    this.users = this.repoService.getUsers();
     // console.log(this.repoService.getFeedbackNotes(this.repoService, true));
   }
 
