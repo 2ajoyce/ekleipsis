@@ -5,6 +5,8 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {DataRepoService} from './providers/data-repo.service';
+import { OneOnOneNote } from './models/OneOnOneNoteModel';
+import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
 
 @Component({
   selector: 'app-root',
