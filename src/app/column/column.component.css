@@ -1,5 +1,5 @@
 .columns {
-    height: 500px;
+    height: 800px;
 }
 
 .column1 {
@@ -9,7 +9,7 @@
 
 .column2 {
     background: lightyellow;
-    border: 2px solid yellow;
+    border: 2px solid orange;
 }
 
 .column3 {
@@ -18,5 +18,45 @@
 }
 
 .columns h1 {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
     text-align: center;
+}
+
+.columns .green {
+    color: green;
+}
+
+.columns .yellow {
+    color: orange;
+}
+
+.columns .red {
+    color: red;
+}
+
+.columns .icon {
+    padding-top: 15px;
+    width: 100%;
+}
+
+.columns .icon .fa {
+    display: block;
+    text-align: center;
+    font-size: 60px;
+    width: 10%;
+    margin: auto;
+}
+
+.columns .icon .green {
+    color: green;
+}
+
+.columns .icon .yellow {
+    color: orange;
+}
+
+.columns .icon .red {
+    color: red;
 }

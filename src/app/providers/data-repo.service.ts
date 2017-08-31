@@ -34,7 +34,6 @@ export class DataRepoService {
     let result: User[] = new Array<User>();
     this.af.list('/users').$ref.once('value', function (snap) {
       snap.forEach(value => {
-        console.log(snap.toJSON());
         result.push(new User(
           value.child('email').val(),
           value.child('firstName').val(),

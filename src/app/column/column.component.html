@@ -1,5 +1,12 @@
 <div [ngClass]="{'column1': column == 1, 'column2': column == 2, 'column3': column == 3}" class="col-xs-4 columns">
-  <h1>{{ title }}</h1>
+  <div class="icon">
+    <div class="fa fa-plus-circle green" *ngIf="title == 'Positives'"></div>
+    <div class="fa fa-check-square-o green" *ngIf="title == 'Goals'"></div>
+    <div class="fa fa-sticky-note-o yellow" *ngIf="title == 'Notes'"></div>
+    <div class="fa fa-exclamation-circle red" *ngIf="title == 'Improvements'"></div>
+    <div class="fa fa-comments-o red" *ngIf="title == 'Takeaways'"></div>
+  </div>
+  <h1 [ngClass]="{'green': title == 'Positives' || title == 'Goals', 'yellow': title == 'Notes', 'red': title =='Improvements' || title == 'Takeaways'}">{{ title }}</h1>
   <ul>
     <li *ngFor="let point of data; let i = index">{{point[2].$value}}</li>
   </ul>
