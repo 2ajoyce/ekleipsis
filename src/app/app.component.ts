@@ -18,11 +18,13 @@ export class AppComponent {
   db: FirebaseObjectObservable<any[]>;
   teamMembersFromFB: FirebaseListObservable<any[]>;
   users: User[];
-  teamFeedback: boolean = true;
+  teamFeedback: Array<TeamFeedbackNote>;
+  oneOnOneFeedback: Array<OneOnOneNote>;
   teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
   activePosition: string = '';
   activeTab: string = 'teamFeedback';
   repoService: DataRepoService;
+  columnsData: any[];
 
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -38,9 +40,20 @@ export class AppComponent {
     this.repoService = new DataRepoService(afAuth, af);
   }
 
+  setColumnData() {
+    if (this.activeTab === 'teamFeedback') {
+      this.columnsData = this.teamFeedback;
+    } else if (this.activeTab === '1on1') {
+      this.columnsData = this.oneOnOneFeedback;
+    }
+  }
+
   // Runs on init of the page
   async ngOnInit() {
     this.users = await this.repoService.getUsers();
+    this.teamFeedback = await this.repoService.getFeedbackNotes(this.repoService, false);
+    this.oneOnOneFeedback = await this.repoService.getOneOnOneNotes(this.repoService, false);
+    this.setColumnData();
     // let temp = await this.repoService.getOneOnOneNotes(this.repoService, true);
     // this.repoService.setOneOnOneNotes(
     //   new OneOnOneNote(
