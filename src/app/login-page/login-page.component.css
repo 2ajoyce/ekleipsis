@@ -1,0 +1,27 @@
+img {
+    display: block;
+    margin: auto;
+    text-align: cemter;
+}
+
+md-input-container {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+button {
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    width: 25%;
+}
+
+h3 {
+    font-size: 16px;
+    text-align: center;
+}
+
+h3:hover {
+    cursor: pointer;
+}
