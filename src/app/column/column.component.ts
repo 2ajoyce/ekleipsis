@@ -21,5 +21,6 @@ export class ColumnComponent implements OnInit {
     } else if (this.data[0][0].$value === 'improvement') {
       this.column = 3;
     }
+    console.log(this.column);
   }
 }
