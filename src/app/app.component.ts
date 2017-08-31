@@ -40,7 +40,15 @@ export class AppComponent {
   // Runs on init of the page
   async ngOnInit() {
     this.users = await this.repoService.getUsers();
-    let temp = await this.repoService.getOneOnOneNotes(this.repoService, true);
-    console.log(temp);
+    // let temp = await this.repoService.getOneOnOneNotes(this.repoService, true);
+    // this.repoService.setTeamFeedbackNotes(
+    //   new TeamFeedbackNote(
+    //       new User('ajoyce@gmail.com', 'Aaron', 'Joyce'),
+    //       'Notes',
+    //       'Was staying up all night for the hackathon really a good idea?',
+    //       false,
+    //       new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski')
+    //   )
+    // );
   }
 }
