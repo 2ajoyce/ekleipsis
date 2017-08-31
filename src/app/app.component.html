@@ -24,21 +24,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <select name="employee-name" id="employees-dropdown"><option value="select">Select</option><option *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option></select>
+        <select name="employee-name" id="employees-dropdown" [(ngModel)]="oneOnOneBuffer.employee"><option value="select">Select</option><option *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option></select>
         <button type="button" class="close" data-dismiss="modal" data-backdrop="static"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">
         <div class="note-type" id="note-type">
-          <div class="note-type-option"><input type="radio" name="note-type" value="goals" /><h3>Goals</h3></div>
-          <div class="note-type-option"><input type="radio" name="note-type" value="notes" checked="checked"/><h3>Notes</h3></div>
-          <div class="note-type-option"><input type="radio" name="note-type" value="takeaways" /><h3>Takeaways</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="goals" [(ngModel)]="oneOnOneBuffer.category" (click)="toggleOneOnOneBufferCategory('goals')" ng-value="goals"/><h3>Goals</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="notes" checked="checked" [(ngModel)]="oneOnOneBuffer.category" (click)="toggleOneOnOneBufferCategory('notes')"/><h3>Notes</h3></div>
+          <div class="note-type-option"><input type="radio" name="note-type" value="takeaways" [(ngModel)]="oneOnOneBuffer.category" (click)="toggleOneOnOneBufferCategory('takeaways')"/><h3>Takeaways</h3></div>
         </div>
-        <textarea name="note-text" id="note-text" cols="80" rows="7"></textarea>
+        <textarea placeholder="Input a message" name="note-text" id="note-text" cols="80" rows="7" ngControl="oneOnOneBuffer.message" [(ngModel)]="oneOnOneBuffer.message" (ngModelChange)="onModelChange()"></textarea>
       </div>
       <div class="modal-footer">
         <div class="share-checkbox"><h3>Share</h3><input type="checkbox" /></div>
         <div class="modal-buttons">
-          <button class="btn-danger">Cancel</button>
+          <button class="btn-danger" (click)="cancel()">Cancel</button>
           <button class="btn-success">Send</button>
           <button class="btn-primary">Done</button>
         </div>

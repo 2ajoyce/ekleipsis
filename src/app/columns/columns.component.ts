@@ -34,15 +34,14 @@ export class ColumnsComponent implements OnInit {
 
   // Filters the teamFeedbackNotes into the three columns
   getColumnData(data: any[]) {
+    console.log(data);
     data.forEach(note => {
-      if (note[0].$key === 'category') {
-        if (note[0].$value === 'positive' || note[0].$value === 'goals') {
-          this.column1Data.push(note);
-        } else if (note[0].$value === 'note') {
-          this.column2Data.push(note);
-        } else if (note[0].$value === 'improvement' || note[0].$value === 'takeaways') {
-          this.column3Data.push(note);
-        }
+      if (note.category === 'positives' || note.category === 'goals') {
+        this.column1Data.push(note);
+      } else if (note.category === 'notes') {
+        this.column2Data.push(note);
+      } else if (note.category === 'improvements' || note.category === 'takeaways') {
+        this.column3Data.push(note);
       }
     });
   }

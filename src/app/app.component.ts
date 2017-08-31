@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnChanges} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {User} from './models/user';
 import {Observable} from 'rxjs/Observable';
@@ -30,6 +30,7 @@ export class AppComponent {
 
   switchTab(tab: string) {
     this.activeTab = tab;
+    this.setColumnData();
   }
 
   constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
@@ -50,8 +51,55 @@ export class AppComponent {
     }
   }
 
+  toggleOneOnOneBufferCategory(data: string) {
+    this.oneOnOneBuffer.category = data;
+  }
+
+  ngOnChanges() {
+  }
+
+  onModelChange() {
+    console.log(this.oneOnOneBuffer.category);
+    console.log(this.oneOnOneBuffer.message);
+    console.log(this.oneOnOneBuffer.employee);
+  }
+
+  cancel() {
+    this.oneOnOneBuffer = new OneOnOneNote(
+      new User('select', 'select', 'select', 'select'),
+      'notes',
+      '',
+      new User('select', 'select', 'select', 'select'));
+  }
+
+  setTeamFeedback() {
+    this.teamFeedback = Array<TeamFeedbackNote>();
+    var note = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is a mess', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous'));
+    var note1 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'positives', 'Great job staying up all night to get this finished!', false, new User('aaron.joyce@vizientinc.com', 'anonymous', 'anonymous', 'anonymous'));
+    var note2 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Better communication', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous'));
+    this.teamFeedback.push(note);
+  }
+
+  setOneOnOne() {
+    this.oneOnOneFeedback = Array<OneOnOneNote>();
+  }
+
   // Runs on init of the page
   async ngOnInit() {
+    this.oneOnOneBuffer = new OneOnOneNote(
+      new User('select', 'select', 'select', 'select'),
+      'notes',
+      '',
+      new User('select', 'select', 'select', 'select'));
+    this.addTeamFeedbackBuffer = new TeamFeedbackNote(
+      new User('select', 'select', 'select', 'select'),
+      'notes',
+      '',
+      false,
+      new User('sender', 'sender', 'sender', 'sender'));
+    this.setTeamFeedback();
+    this.setOneOnOne();
+    this.setColumnData();
     this.users = await this.repoService.getUsers();
     // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
     // console.log('Kyle', kyle);
