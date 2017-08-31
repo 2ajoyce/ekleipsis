@@ -1,10 +1,9 @@
 <app-header></app-header>
-User: {{ user?.email }} !!!!
 <div id="container">
   <div id="header">
     <div class="viewedUsername col-xs-4">
       <select name="activeUsername" class="activeUsername">
-        <option value="activeUsername" *ngFor="let user of teamMembers">{{user.firstName}} {{user.lastName}}</option>
+        <option value="activeUsername" *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option>
       </select>
     </div>
     <div class="tabButtons col-xs-4">
@@ -14,7 +13,7 @@ User: {{ user?.email }} !!!!
       <button class="button" (click)="switchTab('1on1')" [ngClass]="{'btn-warning': activeTab == '1on1'}">1-on-1</button>
     </div>
     <div class="viewedPosition col-xs-4">
-      <h1>{{ jobTitle }}</h1>
+      <h1>{{ activePosition }}</h1>
     </div>
   </div>
   <app-columns [columnsData]="columnsData" [mode]="activeTab"></app-columns>

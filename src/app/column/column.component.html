@@ -8,6 +8,6 @@
   </div>
   <h1 [ngClass]="{'green': title == 'Positives' || title == 'Goals', 'yellow': title == 'Notes', 'red': title =='Improvements' || title == 'Takeaways'}">{{ title }}</h1>
   <ul>
-    <li *ngFor="let point of data">{{ point.message }} - {{ point.email }}</li>
+    <li *ngFor="let point of data">{{ point.message }} - {{ point.sender.email }}</li>
   </ul>
 </div>
