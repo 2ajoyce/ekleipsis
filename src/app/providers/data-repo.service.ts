@@ -139,8 +139,11 @@ export class DataRepoService {
     });
   }
 
-  public setSubordinates(): FirebaseListObservable<any[]> {
-    return null;
+  public async setSubordinates(userEmail: string, subordinateEmail: string) {
+    await this.af.list('/subordinates').push({
+      'email': userEmail,
+      'subordinate': subordinateEmail
+    });
   }
 
 
