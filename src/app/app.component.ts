@@ -33,6 +33,7 @@ export class AppComponent {
   afAuth: AngularFireAuth;
   teamMembersStuff: Array<TeamMember>;
   oneOnOneFeedback: Array<OneOnOneNote>;
+  teamFeedbackBuffer: TeamFeedbackNote;
 
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -77,14 +78,22 @@ export class AppComponent {
       'notes',
       '',
       new User('select', 'select', 'select', 'select'));
+    this.teamFeedbackBuffer = new TeamFeedbackNote(
+      new User('select', 'select', 'select', 'select'),
+      'notes',
+      '',
+      false,
+      new User('sender', 'sender', 'sender', 'sender'));
   }
 
   setTeamFeedback() {
     this.teamFeedback = Array<TeamFeedbackNote>();
     var note = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is a mess', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous'));
-    var note1 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'positives', 'Great job staying up all night to get this finished!', false, new User('aaron.joyce@vizientinc.com', 'anonymous', 'anonymous', 'anonymous'));
+    var note1 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'positives', 'Great job staying up all night to get this somewhat finished!', false, new User('aaron.joyce@vizientinc.com', 'anonymous', 'anonymous', 'anonymous'));
     var note2 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Better communication', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous'));
     this.teamFeedback.push(note);
+    this.teamFeedback.push(note1);
+    this.teamFeedback.push(note2);
   }
 
   setOneOnOne() {
