@@ -1,4 +1,4 @@
-export const enum FeedbackCategory {
+export enum FeedbackCategory {
   Positive,
   Notes,
   Improvements
