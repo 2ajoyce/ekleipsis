@@ -62,8 +62,26 @@ export class DataRepoService {
     return result;
   }
 
-  public getFeedbackNotes():Observable<TeamFeedbackNote[]> {
-    return null;
+  public getFeedbackNotes(withSenders: boolean): Array<TeamFeedbackNote> {
+    let result: Array<TeamFeedbackNote> = null;
+    this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
+      snap.forEach(function (value) {
+        let sender = this.getUser(value.child('sender').val());
+        if (withSenders === false && value.child('isAnonymous').val() === true) {
+          sender = null;
+        }
+        result.push(new TeamFeedbackNote(
+          value.child('noteId').val(),
+          this.getUser(value.child('employee').val()),
+          value.child('category').val(),
+          value.child('message').val(),
+          value.child('isAnonymous').val(),
+          sender
+        ));
+        return true;
+      });
+    });
+    return result;
   }
 
   public getOneOnOneNotes():FirebaseListObservable<any[]> {
