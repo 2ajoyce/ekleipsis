@@ -15,6 +15,7 @@ import {ColumnComponent} from './column/column.component';
 import {ColumnsComponent} from './columns/columns.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
+import { HeaderComponent } from './header/header.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCmYrV_pC4mMCjWqgzLzF-5iT4sw9M0B_U',
@@ -38,7 +39,8 @@ export const firebaseConfig = {
     FooterComponent,
     ColumnComponent,
     ColumnsComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
