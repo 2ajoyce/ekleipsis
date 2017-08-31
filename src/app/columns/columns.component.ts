@@ -34,16 +34,16 @@ export class ColumnsComponent implements OnInit {
 
   // Filters the teamFeedbackNotes into the three columns
   getColumnData(data: FirebaseListObservable<any[]>) {
-    data.forEach(note => {
-      if (note[0].$key === 'category') {
-        if (note[0].$value === 'positive') {
-          this.column1Data.push(note);
-        } else if (note[0].$value === 'note') {
-          this.column2Data.push(note);
-        } else if (note[0].$value === 'improvement') {
-          this.column3Data.push(note);
-        }
-      }
-    });
+    // data.forEach(note => {
+    //   if (note[0].$key === 'category') {
+    //     if (note[0].$value === 'positive') {
+    //       this.column1Data.push(note);
+    //     } else if (note[0].$value === 'note') {
+    //       this.column2Data.push(note);
+    //     } else if (note[0].$value === 'improvement') {
+    //       this.column3Data.push(note);
+    //     }
+    //   }
+    // });
   }
 }

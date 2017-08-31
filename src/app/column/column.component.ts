@@ -15,13 +15,5 @@ export class ColumnComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.data[0][0].$value === 'positive') {
-      this.column = 1;
-    } else if (this.data[0][0].$value === 'note') {
-      this.column = 2;
-    } else if (this.data[0][0].$value === 'improvement') {
-      this.column = 3;
-    }
-    console.log(this.column);
   }
 }
