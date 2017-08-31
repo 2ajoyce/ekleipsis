@@ -85,22 +85,22 @@ export class AppComponent {
 
   setTeamFeedback() {
     this.teamFeedback = Array<TeamFeedbackNote>();
-    var note = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is a mess', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous'));
-    var note1 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'positives', 'Great job staying up all night to get this somewhat finished!', false, new User('aaron.joyce@vizientinc.com', 'anonymous', 'anonymous', 'anonymous'));
-    var note2 = new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Better communication', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous'));
-    this.teamFeedback.push(note);
-    this.teamFeedback.push(note1);
-    this.teamFeedback.push(note2);
+    this.teamFeedback.push(new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is a mess', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous')));
+    this.teamFeedback.push(new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Using new technology tends to backfire', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous')));
+    this.teamFeedback.push(new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'positives', 'Great job staying up all night to get this somewhat finished!', false, new User('aaron.joyce@vizientinc.com', 'anonymous', 'anonymous', 'anonymous')));
+    this.teamFeedback.push(new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'positives', 'Really good at keeping the project moving', false, new User('aaron.joyce@vizientinc.com', 'anonymous', 'anonymous', 'anonymous')));
+    this.teamFeedback.push(new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Better communication', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous')));
+    this.teamFeedback.push(new TeamFeedbackNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Increase knowledge of Angular2', true, new User('anonymous', 'anonymous', 'anonymous', 'anonymous')));
   }
 
   setOneOnOne() {
     this.oneOnOneFeedback = Array<OneOnOneNote>();
-    var note = new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'goals', 'Get better at stuff', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD'));
-    var note1 = new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is literally the worst thing ever', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD'));
-    var note2 = new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Hackathons are stressful but fun', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD'));
-    this.oneOnOneFeedback.push(note);
-    this.oneOnOneFeedback.push(note1);
-    this.oneOnOneFeedback.push(note2);
+    this.oneOnOneFeedback.push(new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'goals', 'Get better at stuff', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD')));
+    this.oneOnOneFeedback.push(new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'goals', 'Meet more people around the office', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD')));
+    this.oneOnOneFeedback.push( new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Firebase is literally the worst thing ever', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD')));
+    this.oneOnOneFeedback.push( new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'notes', 'Spend more time working with tech in our stack', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD')));
+    this.oneOnOneFeedback.push( new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Hackathons are stressful but fun', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD')));
+    this.oneOnOneFeedback.push( new OneOnOneNote(new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski', 'Associate Software Engineer, AD'), 'improvements', 'Check your email more often', new User('joseph.bartley@vizientinc.com', 'Joseph', 'Bartley', 'Associate Software Engineer, AD')));
   }
 
   // Runs on init of the page
