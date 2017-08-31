@@ -14,32 +14,36 @@ import { TeamFeedbackNote } from './models/TeamFeedbackNoteModel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user: Observable<firebase.User>;
+  userQue: Observable<firebase.User>;
+  user: User;
   db: FirebaseObjectObservable<any[]>;
-  teamMembersFromFB: FirebaseListObservable<any[]>;
-  users: User[];
+  // teamMembersFromFB: FirebaseListObservable<any[]>;
+  // users: User[];
   teamFeedback: Array<TeamFeedbackNote>;
   oneOnOneFeedback: Array<OneOnOneNote>;
-  teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
-  activePosition: string = '';
+  // teamFeedbackNotesFromFB: FirebaseListObservable<any[]>;
+  jobTitle: string = '';
   activeTab: string = 'teamFeedback';
   repoService: DataRepoService;
+  teamMembers: Observable<Array<User>>;
   columnsData: any[];
   addTeamFeedbackBuffer: TeamFeedbackNote;
   oneOnOneBuffer: OneOnOneNote;
+  afAuth: AngularFireAuth;
 
   switchTab(tab: string) {
     this.activeTab = tab;
   }
 
   constructor(afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.user = afAuth.authState;
+    this.afAuth = afAuth;
     this.db = af.object('/');
-
-    this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
-    this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
-    this.activePosition = 'Associate Software Engineer, AD';
     this.repoService = new DataRepoService(afAuth, af);
+
+    // this.teamMembersFromFB = af.list('/teams/ekleipsis/members');
+    // this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
+    this.jobTitle = null;
+    this.teamMembers = null;
   }
 
   setColumnData() {
@@ -52,7 +56,10 @@ export class AppComponent {
 
   // Runs on init of the page
   async ngOnInit() {
-    this.users = await this.repoService.getUsers();
+    // this.users = await this.repoService.getUsers();
+    this.userQue.subscribe(event => this.user = Observable.create(this.repoService.getUser(this.repoService, event.email)));
+    this.userQue.subscribe(event => this.teamMembers = Observable.create(this.repoService.getTeamMembers(this.repoService, event.email)));
+    this.userQue.subscribe(event => this.oneOnOneFeedback = Observable.create(this.repoService.getOneOnOneNotes(this.repoService, event.email, false)));
     // let kyle = await this.repoService.getUser(this.repoService, 'kshaffer@gmail.com');
     // console.log('Kyle', kyle);
     // let temp = await this.repoService.getTeamMembers(this.repoService, 'ajoyce@gmail.com');

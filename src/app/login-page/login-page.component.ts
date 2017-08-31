@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../providers/auth.service';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {logger} from "codelyzer/util/logger";
 
 @Component({
   selector: 'app-login-page',
