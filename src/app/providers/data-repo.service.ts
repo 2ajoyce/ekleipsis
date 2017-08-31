@@ -130,11 +130,16 @@ export class DataRepoService {
     });
   }
 
-  public setOneOnOneNotes():FirebaseListObservable<any[]> {
-    return null;
+  public async setOneOnOneNotes(note: OneOnOneNote) {
+    await this.af.list('/oneOnOneNotes').push({
+      'category': note.category,
+      'employee': note.employee.email,
+      'message': note.message,
+      'sender': note.sender.email
+    });
   }
 
-  public setSubordinates():FirebaseListObservable<any[]> {
+  public setSubordinates(): FirebaseListObservable<any[]> {
     return null;
   }
 

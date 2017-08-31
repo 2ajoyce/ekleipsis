@@ -6,6 +6,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {DataRepoService} from './providers/data-repo.service';
 import {TeamFeedbackNote} from './models/TeamFeedbackNoteModel';
+import {OneOnOneNote} from './models/OneOnOneNoteModel';
 
 @Component({
   selector: 'app-root',
@@ -41,13 +42,12 @@ export class AppComponent {
   async ngOnInit() {
     this.users = await this.repoService.getUsers();
     // let temp = await this.repoService.getOneOnOneNotes(this.repoService, true);
-    // this.repoService.setTeamFeedbackNotes(
-    //   new TeamFeedbackNote(
+    // this.repoService.setOneOnOneNotes(
+    //   new OneOnOneNote(
     //       new User('ajoyce@gmail.com', 'Aaron', 'Joyce'),
     //       'Notes',
-    //       'Was staying up all night for the hackathon really a good idea?',
-    //       false,
-    //       new User('brandon.rachelski@gmail.com', 'Brandon', 'Rachelski')
+    //       'Trying to use less profanity',
+    //       new User('kshaffer@gmail.com', 'Kyle', 'Shaffer')
     //   )
     // );
   }
