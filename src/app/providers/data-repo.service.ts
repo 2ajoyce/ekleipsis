@@ -28,32 +28,32 @@ export class DataRepoService {
  this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
  }
 
- public getFeedbackNotes(): FirebaseListObservable {
-
+ public getFeedbackNotes(): FirebaseListObservable<any[]> {
+   return null;
  }
 
- public getOneOnOneNotes(): FirebaseListObservable {
-
+ public getOneOnOneNotes(): FirebaseListObservable<any[]> {
+   return null;
  }
 
- public getTeamMembers(): FirebaseListObservable {
-
+ public getTeamMembers(): FirebaseListObservable<any[]> {
+   return null;
  }
 
- public getSubordinates(): FirebaseListObservable {
-
+ public getSubordinates(): FirebaseListObservable<any[]> {
+   return null;
  }
 
- public setFeedbackNotes(): FirebaseListObservable {
-
+ public setFeedbackNotes(): FirebaseListObservable<any[]> {
+   return null;
  }
 
- public setOneOnOneNotes(): FirebaseListObservable {
-
+ public setOneOnOneNotes(): FirebaseListObservable<any[]> {
+   return null;
  }
 
- public setSubordinates(): FirebaseListObservable {
-
+ public setSubordinates(): FirebaseListObservable<any[]> {
+   return null;
  }
 
 
