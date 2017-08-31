@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TeamFeedbackNote } from '../models/TeamFeedbackNoteModel';
+import {DataRepoService} from '../providers/data-repo.service';
 
 @Component({
   selector: 'app-column',

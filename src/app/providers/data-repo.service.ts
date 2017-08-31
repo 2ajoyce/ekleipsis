@@ -25,27 +25,28 @@ export class DataRepoService {
     this.teamFeedbackNotesFromFB = af.list('/teamFeedbackNotes/0');
   }
 
-  public async getUsers():Promise<User[]> {
+  public async getUsers(): Promise<User[]> {
     let result = new Array<User>();
-    this.af.list('/users').$ref.once('value', function (snap) {
+      await this.af.list('/users').$ref.once('value', function (snap) {
       snap.forEach(value => {
         result.push(new User(
           value.child('email').val(),
           value.child('firstName').val(),
-          value.child('lastName').val()
+          value.child('lastName').val(),
+          value.child('jobTitle').val()
         ));
         return result.length === snap.numChildren();
       });
     });
-    return await result;
+    return result;
   }
 
-  public async getUser(dataRepo:DataRepoService, email:string):Promise<User> {
-    let result:User = null;
+  public async getUser(dataRepo: DataRepoService, email:string): Promise<User> {
+    let result: User = null;
     let users = await dataRepo.getUsers();
     // console.log('Users', users, users.length);
-    users.forEach((user:User) => {
-      console.log(user.email, email, user.email === email);
+    users.forEach((user: User) => {
+      // console.log(user.email, email, user.email === email);
       if (user.email === email) {
         result = user;
       }
@@ -57,7 +58,7 @@ export class DataRepoService {
   public async getFeedbackNotes(dataRepo:DataRepoService, withSenders:boolean) {
     let result = [];
     let finalResult:TeamFeedbackNote[] = new Array<TeamFeedbackNote>();
-    this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
+    await this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
       snap.forEach(value => {
         let sender = value.child('sender').val();
         if (withSenders === false && value.child('isAnonymous').val() === true) {
@@ -89,7 +90,7 @@ export class DataRepoService {
   public async getOneOnOneNotes(dataRepo: DataRepoService, withSenders:boolean) {
     let result = [];
     let finalResult: OneOnOneNote[] = new Array<OneOnOneNote>();
-    this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
+    await this.af.list('/teamFeedbackNotes').$ref.once('value', function (snap) {
       snap.forEach(value => {
         result.push([
           value.child('employee').val(),
@@ -112,13 +113,82 @@ export class DataRepoService {
     return await result;
   }
 
-  public getTeamMembers():FirebaseListObservable<any[]> {
-    return null;
+  public async getManager(dataRepo: DataRepoService, email: string): Promise<User> {
+    let result = [];
+    let finalResult = new Array<User>();
+    await this.af.list('/subordinates').$ref.once('value', function (snap) {
+      snap.forEach(value => {
+        result.push([
+          value.child('email').val(),
+          value.child('subordinate').val()
+        ]);
+        return result.length === snap.numChildren();
+      });
+      result.forEach(async (item) => {
+        if (item[1] === email) {
+          // console.log(await dataRepo.getUser(dataRepo, item[1]));
+          finalResult.push(await dataRepo.getUser(dataRepo, item[0]));
+        }
+      });
+    });
+    return finalResult[0];
   }
 
-  public getSubordinates():FirebaseListObservable<any[]> {
-    return null;
+  public async getTeamMembers(dataRepo: DataRepoService, email: string): Promise<Array<User>> {
+    let bulk = [];
+    let managerFinal = new Array<string>();
+    let subordinateFinal = new Array<string>();
+    let result = new Array<User>();
+
+    await this.af.list('/subordinates').$ref.once('value', async function(snap) {
+      snap.forEach(value => {
+        bulk.push([
+          value.child('email').val(),
+          value.child('subordinate').val()
+        ]);
+        return bulk.length === snap.numChildren();
+      });
+      await bulk.forEach(async (item) => {
+        if (item[1] === email) {
+          managerFinal.push(item[0]);
+        }
+      });
+      await bulk.forEach(async (item) => {
+        if (item[0] === managerFinal[0]) {
+          // console.log(await dataRepo.getUser(dataRepo, item[1]));
+          subordinateFinal.push(item[1]);
+        }
+      });
+    });
+    subordinateFinal = subordinateFinal.filter((x) => x !== email);
+
+    subordinateFinal.map(async function (item) {
+      result.push(await dataRepo.getUser(dataRepo, item));
+    });
+
+    return await result;
   }
+
+  public async getSubordinates(dataRepo: DataRepoService, email: string): Promise<User[]> {
+  let result = [];
+  let finalResult = new Array<User>();
+  await this.af.list('/subordinates').$ref.once('value', function (snap) {
+    snap.forEach(value => {
+      result.push([
+        value.child('email').val(),
+        value.child('subordinate').val()
+      ]);
+      return result.length === snap.numChildren();
+    });
+    result.forEach(async (item) => {
+      if (item[0] === email) {
+        // console.log(await dataRepo.getUser(dataRepo, item[1]));
+        finalResult.push(await dataRepo.getUser(dataRepo, item[1]));
+      }
+    });
+  });
+  return finalResult;
+}
 
   public async setTeamFeedbackNotes(tfn: TeamFeedbackNote) {
     await this.af.list('/teamFeedbackNotes').push({
